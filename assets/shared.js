@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('form[id="rfq-form"] button[type="submit"]').forEach((button) => {
     if (/WhatsApp/i.test(button.textContent)) button.textContent = 'Submit Enquiry';
   });
+  // The enquiry forms use the secure API endpoint. Remove legacy mail-client
+  // fallbacks so a visitor is never sent to Outlook instead of submitting.
+  document.querySelectorAll('[onclick="sendViaEmailDirect()"], [onclick="handleContactEmail()"]').forEach((button) => button.remove());
   document.querySelectorAll('footer').forEach((footer) => {
     if (!footer.querySelector('[data-legal-links]')) {
       const legal = document.createElement('p'); legal.dataset.legalLinks = ''; legal.className = 'mt-3 text-xs text-slate-500';
